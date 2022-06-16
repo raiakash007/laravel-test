@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use DB;
 use App\Models\Event;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
@@ -101,7 +101,16 @@ class EventsController extends BaseController
      */
 
     public function getEventsWithWorkshops() {
-        throw new \Exception('implement in coding task 1');
+        //throw new \Exception('implement in coding task 1');
+        $result = DB::table('workshops')
+->select('*')
+->join('events','workshops.event_id','=','events.id')
+->get();
+
+
+echo "<pre>";
+print_r(json_encode($result));
+echo "</pre>";
     }
 
 
